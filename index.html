@@ -1,789 +1,294 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kodamar | Belajar AI & Content Creation</title>
-  <meta name="description" content="Perjalanan belajar AI dari nol, membangun portofolio digital, dan menjadi konten kreator." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #050816;
-      --bg-alt: #0b1020;
-      --card: #111827;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.1);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #1f2937;
-      --radius: 14px;
-      --maxw: 1080px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #1f2937 0, #050816 45%);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(5, 8, 22, 0.95), rgba(5, 8, 22, 0.7));
-    }
-
-    .nav-inner {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0.85rem 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid var(--accent-soft);
-      background: radial-gradient(circle at 30% 0%, #38bdf8, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: #e0f2fe;
-    }
-
-    .brand-text-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .brand-text-sub {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    nav a {
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      transition: 0.15s ease;
-    }
-
-    nav a:hover {
-      color: var(--text);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .cta-nav {
-      font-size: 0.82rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid var(--accent-soft);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e0f2fe;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .cta-nav span {
-      font-size: 0.9rem;
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .section {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 2.5rem 1.2rem;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
-      gap: 2.5rem;
-      align-items: center;
-      padding-top: 2.8rem;
-      padding-bottom: 1.5rem;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-highlight {
-      background: linear-gradient(120deg, #38bdf8, #a855f7);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 0.98rem;
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-      max-width: 34rem;
-    }
-
-    .hero-subtitle strong {
-      color: #e5e7eb;
-      font-weight: 500;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1.6rem;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 0.7rem 1.3rem;
-      font-size: 0.9rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: 0.18s ease;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      color: #0b1120;
-      font-weight: 600;
-      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(56, 189, 248, 0.45);
-    }
-
-    .btn-ghost {
-      border-color: var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--muted);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent-soft);
-      color: var(--text);
-      background: rgba(15, 23, 42, 1);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.4rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .hero-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .hero-meta-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.12);
-    }
-
-    .hero-card {
-      border-radius: 18px;
-      padding: 1.4rem 1.3rem 1.2rem;
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 55%), 
-                  radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9), #020617);
-      border: 1px solid rgba(15, 23, 42, 0.9);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-card-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .hero-card-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.85rem;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .stat {
-      padding: 0.65rem 0.7rem;
-      border-radius: 0.9rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-    }
-
-    .stat-label {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 0.15rem;
-    }
-
-    .stat-value {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .pill {
-      border-radius: 999px;
-      padding: 0.26rem 0.7rem;
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      font-size: 0.72rem;
-      color: var(--muted);
-      background: rgba(15, 23, 42, 0.96);
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 1rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .section-sub {
-      font-size: 0.85rem;
-      color: var(--muted);
-      max-width: 26rem;
-    }
-
-    .grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 1rem 1rem 0.95rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.8);
-    }
-
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .card-tagline {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.55rem;
-    }
-
-    .card-footer {
-      margin-top: 0.65rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.72rem;
-      border-radius: 999px;
-      padding: 0.22rem 0.6rem;
-      background: var(--accent-soft);
-      color: #e0f2fe;
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .list {
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding-left: 1rem;
-    }
-
-    .list li {
-      margin-bottom: 0.25rem;
-    }
-
-    .apps-grid {
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .apps-grid .card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .apps-tag {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .apps-status {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .apps-status span {
-      color: #a5b4fc;
-      font-weight: 500;
-    }
-
-    .contact-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
-      gap: 1.2rem;
-      align-items: center;
-    }
-
-    .contact-main {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .contact-main p + p {
-      margin-top: 0.4rem;
-    }
-
-    .contact-list {
-      font-size: 0.9rem;
-    }
-
-    .contact-list a {
-      color: #e0f2fe;
-    }
-
-    .contact-list div {
-      margin-bottom: 0.35rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 1.5rem;
-    }
-
-    .footer-inner {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 1.1rem 1.2rem 1.4rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-inner a {
-      color: var(--muted);
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero {
-        padding-top: 2rem;
-      }
-
-      .hero-card {
-        order: -1;
-      }
-
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .contact-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      nav {
-        display: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KodarmarCorp - AI Content Creator & Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        nav a:hover {
+            opacity: 0.8;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #fff;
+            color: #667eea;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        section {
+            padding: 4rem 2rem;
+        }
+        h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .bio-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .social-links a:hover {
+            background-color: #764ba2;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        .blog-preview {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        .blog-preview h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        .blog-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="page">
     <header>
-      <div class="nav-inner">
-        <div class="brand">
-          <div class="logo">K</div>
-          <div>
-            <div class="brand-text-title">kodamarcorp</div>
-            <div class="brand-text-sub">Learning AI • Content & Apps</div>
-          </div>
-        </div>
-        <nav>
-          <a href="#home">Home</a>
-          <a href="#learning">Belajar AI</a>
-          <a href="#blog">Blog</a>
-          <a href="#apps">Apps</a>
-          <a href="#contact">Contact</a>
+        <nav class="container">
+            <div class="logo">KodarmarCorp</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+            </ul>
         </nav>
-        <a href="#contact" class="cta-nav">
-          <span>Kolaborasi</span> →
-        </a>
-      </div>
     </header>
 
-    <main>
-      <!-- HERO -->
-      <section id="home" class="section hero">
-        <div>
-          <div class="hero-eyebrow">Perjalanan nyata, bukan teori kosong</div>
-          <h1 class="hero-title">
-            Belajar <span class="hero-highlight">AI & Content Creation</span><br />
-            dari nol, dibangun di depan publik.
-          </h1>
-          <p class="hero-subtitle">
-            Saya sedang membangun skill <strong>kecerdasan buatan</strong> dan
-            <strong>konten digital</strong> dari titik nol — sambil
-            mendokumentasikan prosesnya secara jujur. Website ini adalah
-            <strong>markas progres</strong>: catatan belajar, eksperimen, dan
-            aplikasi yang saya deploy.
-          </p>
-          <div class="hero-actions">
-            <a href="#learning" class="btn btn-primary">
-              Mulai dari belajar AI
-            </a>
-            <a href="#blog" class="btn btn-ghost">
-              Lihat catatan & artikel
-            </a>
-          </div>
-          <div class="hero-meta">
-            <span><span class="hero-meta-dot"></span> Status: aktif belajar setiap hari</span>
-            <span>Fokus: AI tools, konten pendek, eksperimen aplikasi</span>
-          </div>
-        </div>
+    <section class="hero" id="home">
+        <h1>Selamat Datang di KodarmarCorp</h1>
+        <p>AI Content Creator | Video Generator | SEO Optimization Expert</p>
+        <a href="#tentang" class="btn">Pelajari Lebih Lanjut</a>
+    </section>
 
-        <aside class="hero-card">
-          <div class="hero-card-label">Snapshot 2025</div>
-          <div class="hero-card-title">Dari “diremehkan” → membangun aset digital</div>
-          <div class="hero-card-sub">
-            Tidak mulai dari “expert”. Saya mulai dari situasi tanpa pekerjaan,
-            tanpa portofolio, dan banyak yang meremehkan. Di sini, saya ubah itu
-            jadi bahan bakar.
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat">
-              <div class="stat-label">Fokus tahun ini</div>
-              <div class="stat-value">AI + Konten</div>
+    <section id="tentang">
+        <div class="container">
+            <h2>Tentang Saya</h2>
+            <div class="bio-section">
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    Saya adalah content creator dan developer berpengalaman yang fokus pada penggunaan AI untuk produksi konten digital. 
+                    Dengan keahlian dalam video generation, SEO optimization, dan AI automation, saya membantu creator memaksimalkan 
+                    potensi konten mereka di YouTube dan TikTok.
+                </p>
+                <p style="margin-bottom: 1.5rem;">
+                    Spesialisasi saya mencakup:
+                </p>
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>🎬 Video Generation & Editing dengan AI (Sora 2, VEO 3.1)</li>
+                    <li>📊 SEO Optimization untuk Social Media</li>
+                    <li>🤖 AI-Powered Automation & Application Development</li>
+                    <li>💰 YouTube & TikTok Monetization Strategy</li>
+                    <li>🔧 API Integration & Web Application Development</li>
+                </ul>
+                <h3 style="color: #667eea; margin-top: 2rem; margin-bottom: 1rem;">Hubungi Saya:</h3>
+                <div class="social-links">
+                    <a href="https://youtube.com" title="YouTube">YT</a>
+                    <a href="https://tiktok.com" title="TikTok">TK</a>
+                    <a href="https://github.com/kodamarcorp" title="GitHub">GH</a>
+                    <a href="mailto:info@kodamarcorp.com" title="Email">✉</a>
+                </div>
             </div>
-            <div class="stat">
-              <div class="stat-label">Arah</div>
-              <div class="stat-value">Skill → Audience → Income</div>
+        </div>
+    </section>
+
+    <section id="portfolio" style="background-color: white;">
+        <div class="container">
+            <h2>Portfolio & Projects</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🎥 AI Video Generator</h3>
+                    <p>Aplikasi untuk generate video otomatis menggunakan Sora 2 dan VEO 3.1. Sempurna untuk konten YouTube dan TikTok.</p>
+                </div>
+                <div class="card">
+                    <h3>📈 SEO Optimizer Tool</h3>
+                    <p>Tools yang menggunakan AI untuk generate title, caption, dan hashtag yang optimal untuk engagement maksimal.</p>
+                </div>
+                <div class="card">
+                    <h3>🤖 Automation Suite</h3>
+                    <p>Suite lengkap untuk automate workflow content creation dengan Google Apps Script dan API integration.</p>
+                </div>
+                <div class="card">
+                    <h3>🎙️ Voiceover Generator</h3>
+                    <p>Convert transcript ke voiceover profesional dengan ElevenLabs, dioptimalkan untuk elderly listeners.</p>
+                </div>
+                <div class="card">
+                    <h3>💼 Web Applications</h3>
+                    <p>Custom web apps dengan JavaScript, Python, dan full-stack development menggunakan free tier cloud services.</p>
+                </div>
+                <div class="card">
+                    <h3>📚 Content Consulting</h3>
+                    <p>Konsultasi SEO optimization, monetization strategy, dan niche selection untuk maksimalkan RPM.</p>
+                </div>
             </div>
-          </div>
-
-          <div class="pill-row">
-            <span class="pill">Belajar AI dari nol</span>
-            <span class="pill">Dokumentasi perjalanan</span>
-            <span class="pill">Membangun portofolio digital</span>
-            <span class="pill">Eksperimen aplikasi</span>
-          </div>
-        </aside>
-      </section>
-
-      <!-- LEARNING AI -->
-      <section id="learning" class="section">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">Belajar AI: log perjalanan</h2>
-            <p class="section-sub">
-              Bagian ini akan berisi catatan singkat apa yang saya pelajari
-              tentang AI: tools, konsep, eksperimen kecil, dan insight yang
-              relevan untuk kreator & pekerja lepas.
-            </p>
-          </div>
-          <span class="badge">
-            <span class="badge-dot"></span>
-            Early stage learner
-          </span>
         </div>
+    </section>
 
-        <div class="grid grid-2">
-          <article class="card">
-            <h3 class="card-title">Mengapa saya memilih jalur AI + konten?</h3>
-            <p class="card-tagline">
-              Kombinasi yang punya potensi income besar tanpa harus jadi
-              programmer senior.
-            </p>
-            <ul class="list">
-              <li>AI bisa bantu produksi konten lebih cepat dan konsisten.</li>
-              <li>Konten bisa menarik audience, bukan cuma “skill di atas kertas”.</li>
-              <li>
-                Portofolio bisa dibangun dari eksperimen kecil yang nyata, bukan
-                sertifikat.
-              </li>
-            </ul>
-            <div class="card-footer">
-              <span>Log #01 • draft awal</span>
-              <span>Segera di-update</span>
+    <section id="blog">
+        <div class="container">
+            <h2>Blog Terbaru & Tutorial</h2>
+            
+            <div class="blog-preview">
+                <h3>Cara Maximize YouTube RPM dengan Niche Selection yang Tepat</h3>
+                <p class="blog-date">19 November 2025</p>
+                <p>Pelajari strategi memilih niche yang high-RPM dan target audience Gen X untuk monetization optimal...</p>
+                <a href="#" class="btn" style="font-size: 0.9rem; padding: 0.6rem 1.5rem;">Baca Selengkapnya →</a>
             </div>
-          </article>
 
-          <article class="card">
-            <h3 class="card-title">Fokus belajar 90 hari pertama</h3>
-            <p class="card-tagline">
-              Daripada bingung dengan semua hal tentang AI, saya pecah jadi
-              fokus kecil yang bisa dieksekusi.
-            </p>
-            <ul class="list">
-              <li>Memahami dasar-dasar AI yang relevan untuk konten.</li>
-              <li>Latihan memakai AI untuk menulis, riset, dan ide konten.</li>
-              <li>Membangun 2–3 aplikasi sederhana sebagai bukti kerja.</li>
-            </ul>
-            <div class="card-footer">
-              <span>Roadmap 90 hari</span>
-              <span>Versi 1.0</span>
+            <div class="blog-preview">
+                <h3>Perbandingan Sora 2 vs VEO 3.1 untuk Content Creator</h3>
+                <p class="blog-date">18 November 2025</p>
+                <p>Review mendalam tentang fitur, kecepatan, dan kualitas kedua AI video generator terpopuler saat ini...</p>
+                <a href="#" class="btn" style="font-size: 0.9rem; padding: 0.6rem 1.5rem;">Baca Selengkapnya →</a>
             </div>
-          </article>
-        </div>
-      </section>
 
-      <!-- BLOG -->
-      <section id="blog" class="section">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">Blog & catatan publik</h2>
-            <p class="section-sub">
-              Nanti di sini akan muncul artikel pendek: apa yang saya pelajari
-              minggu ini, eksperimen yang berhasil/gagal, dan insight jujur
-              tentang perjalanan dari nol.
-            </p>
-          </div>
-          <div class="section-sub" style="font-size:0.78rem;">
-            Untuk sementara, ini placeholder. Begitu artikel pertama jadi,
-            link-nya akan ditaruh di sini.
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <article class="card">
-            <h3 class="card-title">[Coming soon] Artikel pertama</h3>
-            <p class="card-tagline">
-              Saya akan mulai dengan satu tulisan: kenapa saya memutuskan tetap
-              maju walaupun diremehkan.
-            </p>
-            <p class="list">
-              Target: 1 artikel pendek per minggu. Fokus ke kejujuran,
-              pembelajaran, dan hal-hal praktis — bukan teori yang muluk-muluk.
-            </p>
-            <div class="card-footer">
-              <span>Status: draft</span>
-              <span>Target: minggu ini</span>
+            <div class="blog-preview">
+                <h3>Setup Google Apps Script untuk Automate Content Production</h3>
+                <p class="blog-date">17 November 2025</p>
+                <p>Tutorial step-by-step menggunakan Google Apps Script dan API integration untuk automate workflow production...</p>
+                <a href="#" class="btn" style="font-size: 0.9rem; padding: 0.6rem 1.5rem;">Baca Selengkapnya →</a>
             </div>
-          </article>
 
-          <article class="card">
-            <h3 class="card-title">Topik yang akan sering muncul</h3>
-            <ul class="list">
-              <li>Belajar AI dari perspektif pemula total.</li>
-              <li>Menggunakan AI untuk bantu produksi konten.</li>
-              <li>Membangun personal brand dari nol.</li>
-              <li>Eksperimen cari income kecil-kecilan di internet.</li>
-            </ul>
-            <div class="card-footer">
-              <span>Ide konten awal</span>
-              <span>Bisa berubah seiring perjalanan</span>
+            <div class="blog-preview">
+                <h3>TikTok Algorithm 2025: Strategi Maximize Engagement</h3>
+                <p class="blog-date">16 November 2025</p>
+                <p>Panduan lengkap tentang TikTok algorithm update 2025 dan strategi verified accounts untuk engagement maksimal...</p>
+                <a href="#" class="btn" style="font-size: 0.9rem; padding: 0.6rem 1.5rem;">Baca Selengkapnya →</a>
             </div>
-          </article>
         </div>
-      </section>
-
-      <!-- APPS -->
-      <section id="apps" class="section">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">Apps & eksperimen</h2>
-            <p class="section-sub">
-              Di bagian ini nanti akan ada link ke aplikasi sederhana yang saya
-              buat atau modifikasi menggunakan AI — walaupun kecil, yang penting
-              <em>nyata dan bisa dicoba orang lain</em>.
-            </p>
-          </div>
-        </div>
-
-        <div class="apps-grid">
-          <article class="card">
-            <div class="apps-tag">Belum ada aplikasi live…</div>
-            <h3 class="card-title">Slot untuk app pertama</h3>
-            <p class="card-tagline">
-              Misalnya: text summarizer, idea generator untuk konten, atau tool
-              kecil lain yang membantu kreator.
-            </p>
-            <p class="apps-status">
-              Status sekarang: <span>menyiapkan fondasi belajar dulu</span>.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="apps-tag">Rencana jangka pendek</div>
-            <h3 class="card-title">Target 2–3 aplikasi mini</h3>
-            <ul class="list">
-              <li>1 tool untuk membantu penulisan konten.</li>
-              <li>1 tool untuk ide video pendek.</li>
-              <li>1 eksperimen bebas, apa pun yang menarik.</li>
-            </ul>
-            <div class="card-footer">
-              <span>Roadmap apps</span>
-              <span>Akan di-update</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact" class="section">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">Contact & kolaborasi</h2>
-            <p class="section-sub">
-              Jika Anda tertarik mengikuti perjalanan saya, kolaborasi, atau
-              sekadar berbagi insight, Anda bisa menghubungi saya lewat kanal di
-              bawah ini.
-            </p>
-          </div>
-        </div>
-
-        <div class="card contact-card">
-          <div class="contact-main">
-            <p>
-              Saat ini saya masih dalam fase membangun skill dan aset digital
-              dari titik nol. Namun saya terbuka untuk:
-            </p>
-            <p>
-              • Kolaborasi konten<br />
-              • Eksperimen kecil terkait AI & automation<br />
-              • Project sederhana yang relevan dengan belajar AI
-            </p>
-            <p style="margin-top:0.7rem;">
-              Perlahan, bagian ini akan bertransformasi dari “belajar” menjadi
-              “menawarkan value yang jelas”.
-            </p>
-          </div>
-          <div class="contact-list">
-            <div>Email: <a href="mailto:kodamarcorp@gmail.com">kodamarcorp@gmail.com</a></div>
-            <div>GitHub: <a href="https://github.com/kodamarcorp" target="_blank" rel="noreferrer">github.com/kodamarcorp</a></div>
-            <div>Website: <a href="https://kodamarcorp.github.io" target="_blank" rel="noreferrer">kodamarcorp.github.io</a></div>
-          </div>
-        </div>
-      </section>
-    </main>
+    </section>
 
     <footer>
-      <div class="footer-inner">
-        <span>© <span id="year"></span> kodamarcorp. Building in public.</span>
-        <span>Versi awal website • akan berkembang seiring perjalanan.</span>
-      </div>
+        <div class="container">
+            <p>&copy; 2025 KodarmarCorp. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Dioptimalkan untuk AI Content Creators & Digital Entrepreneurs</p>
+        </div>
     </footer>
-  </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
