@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panduan lengkap membuat video AI keren dengan Google Veo 3.1. Mudah untuk pemula, cocok untuk anak-anak dan edukasi digital.">
+    <title>Panduan Membuat Video Keren dengan Google Veo 3.1</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f5f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        .back-nav {
+            max-width: 720px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+        }
+        .back-nav a {
+            color: #4f46e5;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .back-nav a:hover {
+            color: #6366f1;
+        }
+        .poster-container {
+            width: 720px;
+            min-height: 960px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe, #f0f9ff);
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #818cf8, #a78bfa);
+            top: -100px;
+            right: -100px;
+        }
+        .shape-2 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #60a5fa, #93c5fd);
+            bottom: -50px;
+            left: -50px;
+        }
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #fbbf24, #fcd34d);
+            top: 40%;
+            left: 60%;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 52px;
+            font-weight: 800;
+            color: #4f46e5;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6366f1;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title .material-icons {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+        .section-content {
+            font-size: 20px;
+        }
+        .highlight {
+            background: linear-gradient(120deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.3) 100%);
+            padding: 0 5px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .feature-item {
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border-radius: 15px;
+            padding: 15px;
+            flex: 1 1 calc(50% - 15px);
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+        }
+        .feature-item .material-icons {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #4f46e5;
+        }
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            margin-top: 15px;
+        }
+        .steps li {
+            counter-increment: step;
+            margin-bottom: 15px;
+            padding-left: 45px;
+            position: relative;
+        }
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: #4f46e5;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .prompt-example {
+            background: #f0f9ff;
+            border-left: 4px solid #60a5fa;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #6b7280;
+        }
+        .emoji {
+            font-size: 24px;
+            margin: 0 5px;
+        }
+        .cta-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+        }
+        .cta-section h3 {
+            color: #4f46e5;
+            margin-bottom: 15px;
+        }
+        .social-share {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .social-share a img {
+            transition: transform 0.3s;
+        }
+        .social-share a:hover img {
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .poster-container {
+                width: 98vw;
+                min-height: 100vh;
+                padding: 15px 10px;
+            }
+            .title {
+                font-size: 2.1rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .section-content {
+                font-size: 1rem;
+            }
+            .feature-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-nav">
+        <a href="../index.html">⬅ Kembali ke Blog</a>
+    </div>
+    
+    <div class="poster-container">
+        <!-- Background Shapes -->
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+        
+        <div class="content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="title">Panduan Membuat Video Keren dengan Google Veo 3.1</h1>
+                <p class="subtitle">Cara Mudah Membuat Video AI untuk Anak-Anak</p>
+            </div>
+            
+            <!-- Section 1: Apa itu Google Veo 3.1 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">smart_toy</i>
+                    Apa itu Google Veo 3.1?
+                </h2>
+                <div class="section-content">
+                    <p>Google Veo 3.1 adalah <span class="highlight">AI pintar</span> dari Google yang bisa membuat video hanya dari <span class="highlight">teks yang kamu tulis</span>! Kamu cukup menulis deskripsi, dan AI akan membuat video pendek untukmu.</p>
+                    
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/eb7b107d4a31.jpg" alt="Anak-anak belajar teknologi" width="500">
+                    </div>
+                    
+                    <p>Video yang dihasilkan bisa memiliki:</p>
+                    <ul>
+                        <li>Resolusi 720p atau 1080p (gambar yang jernih)</li>
+                        <li>Durasi 4, 6, atau 8 detik</li>
+                        <li>Suara yang sesuai dengan video</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Section 2: Cara Mengakses Google Veo 3.1 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">login</i>
+                    Cara Mengakses Google Veo 3.1
+                </h2>
+                <div class="section-content">
+                    <p>Kamu bisa mengakses Google Veo 3.1 melalui:</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="material-icons">code</i>
+                            <div>
+                                <strong>Gemini API</strong>
+                                <p>Untuk membuat aplikasi kustom</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">science</i>
+                            <div>
+                                <strong>Google AI Studio</strong>
+                                <p>Tempat untuk bereksperimen</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">cloud</i>
+                            <div>
+                                <strong>Vertex AI</strong>
+                                <p>Platform Google Cloud</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">movie</i>
+                            <div>
+                                <strong>Flow</strong>
+                                <p>Editor video AI Google</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3: Tips Menulis Prompt -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">edit</i>
+                    Tips Menulis Prompt yang Efektif
+                </h2>
+                <div class="section-content">
+                    <p>Untuk membuat video yang bagus, tulis prompt dengan detail:</p>
+                    <ul>
+                        <li>Jelaskan <span class="highlight">siapa</span> yang ada di video</li>
+                        <li>Jelaskan <span class="highlight">apa yang mereka lakukan</span></li>
+                        <li>Jelaskan <span class="highlight">dimana dan kapan</span> kejadiannya</li>
+                        <li>Jelaskan <span class="highlight">suara</span> yang kamu inginkan</li>
+                    </ul>
+                    
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/c9c22366dc4f.jpg" alt="Anak perempuan belajar dengan robot" width="400">
+                    </div>
+                    
+                    <div class="prompt-example">
+                        <strong>Contoh Prompt:</strong> "Seekor kucing oranye lucu sedang mengejar bola merah di taman yang penuh bunga. Kucing itu melompat dengan gembira sambil suara kucing meong-meong dan suara tawa anak-anak di latar belakang."
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 4: Fitur Keren Google Veo 3.1 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">auto_awesome</i>
+                    Fitur Keren Google Veo 3.1
+                </h2>
+                <div class="section-content">
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="material-icons">image</i>
+                            <div>
+                                <strong>Ingredients to Video</strong>
+                                <p>Gunakan gambar referensi untuk membantu AI</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">filter_frames</i>
+                            <div>
+                                <strong>Frames to Video</strong>
+                                <p>Tentukan gambar awal dan akhir video</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">extension</i>
+                            <div>
+                                <strong>Ekstensi Video</strong>
+                                <p>Perpanjang video yang sudah ada</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">face</i>
+                            <div>
+                                <strong>Konsistensi Karakter</strong>
+                                <p>Pertahankan penampilan karakter yang sama</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/c921b62b6ee3.jpg" alt="Contoh video AI yang dibuat" width="500">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5: Alur Kerja Praktis -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">route</i>
+                    Alur Kerja Praktis
+                </h2>
+                <div class="section-content">
+                    <p>Ikuti langkah-langkah ini untuk membuat video keren:</p>
+                    <ol class="steps">
+                        <li><strong>Perencanaan:</strong> Pikirkan ide video apa yang ingin kamu buat</li>
+                        <li><strong>Tulis Prompt:</strong> Tulis deskripsi detail tentang video yang kamu inginkan</li>
+                        <li><strong>Generasi Video:</strong> Masukkan prompt ke Google Veo 3.1</li>
+                        <li><strong>Perbaiki:</strong> Jika hasil kurang bagus, ubah prompt dan coba lagi</li>
+                        <li><strong>Ekstensi:</strong> Perpanjang video jika terlalu pendek</li>
+                        <li><strong>Gabungkan:</strong> Gabungkan beberapa klip untuk membuat video yang lebih panjang</li>
+                    </ol>
+                    
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/2b605a1035d5.jpg" alt="Proses pembuatan video" width="500">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 6: Contoh Video -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">movie_filter</i>
+                    Ide Video Keren yang Bisa Kamu Buat
+                </h2>
+                <div class="section-content">
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="material-icons">pets</i>
+                            <div>
+                                <strong>Hewan Lucu</strong>
+                                <p>Kucing atau anjing melakukan hal-hal lucu</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">rocket_launch</i>
+                            <div>
+                                <strong>Petualangan Luar Angkasa</strong>
+                                <p>Astronot menjelajahi planet baru</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">emoji_nature</i>
+                            <div>
+                                <strong>Dunia Fantasi</strong>
+                                <p>Peri dan naga di hutan ajaib</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">sports_soccer</i>
+                            <div>
+                                <strong>Olahraga Seru</strong>
+                                <p>Pemain sepak bola mencetak gol</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/589a99b0e62c.jpg" alt="Robot kartun lucu" width="300">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>Sekarang kamu siap membuat video keren dengan Google Veo 3.1! <span class="emoji">🎬</span> <span class="emoji">✨</span> <span class="emoji">🚀</span></p>
+                <p>Ingat, latihan membuat sempurna. Terus coba dan eksperimen dengan ide-ide kreatifmu!</p>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h3>Bagikan ke teman atau komentar jika kamu suka konten ini!</h3>
+                <p><a href="mailto:dinar.ajip@gmail.com" style="color:#6366f1; text-decoration:none;">Feedback & Kolaborasi</a></p>
+                <div class="social-share">
+                    <a href="https://wa.me/?text=Panduan%20Google%20Veo%203.1" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" width="32">
+                    </a>
+                    <a href="https://t.me/share/url?url=https://dinarajip.github.io/posts/post-veo.html" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" width="32">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
